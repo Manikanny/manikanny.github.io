@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gudipati Manikesh — Software Development Engineer</title>
-<meta name="description" content="Gudipati Manikesh — Software Development Engineer building cloud-native distributed systems and multi-agent AI platforms.">
+<title>Gudipati Manikesh — Software Development Engineer (AI Engineer)</title>
+<meta name="description" content="Gudipati Manikesh — Software Development Engineer (AI Engineer) building cloud-native distributed systems and multi-agent AI platforms.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -109,12 +109,32 @@
   }
   .hero-grid{
     display:grid;
-    grid-template-columns:1.1fr 0.9fr;
-    gap:56px;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:44px;
     align-items:center;
   }
   @media (max-width:860px){
-    .hero-grid{grid-template-columns:1fr; gap:36px;}
+    .hero-grid{grid-template-columns:1fr; gap:24px;}
+  }
+  .hero-visual{
+    position:relative;
+    border:1px solid rgba(20,31,41,0.18);
+    background:var(--panel);
+    border-radius:24px;
+    overflow:hidden;
+    aspect-ratio: 4 / 5;
+    box-shadow:0 18px 32px rgba(20,31,41,0.06);
+    transform:translateY(-92px);
+  }
+  .hero-visual img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 28%;
+    object-position: right center 28%;
+    transform-origin:center center;
+    filter:saturate(0.96) contrast(1.05);
   }
   .eyebrow{
     font-family:var(--mono);
@@ -125,15 +145,32 @@
   h1{
     font-family:var(--mono);
     font-weight:500;
-    font-size:clamp(2.1rem, 4.6vw, 3.3rem);
-    line-height:1.14;
-    letter-spacing:-0.01em;
+    font-size:clamp(2rem, 4vw, 5rem);
+    line-height:0.98;
+    letter-spacing:-0.05em;
     margin:0 0 22px;
+    max-width:100%;
+    width:100%;
+    text-wrap:balance;
+  }
+  .fire {
+    display:inline-block;
+    font-size:0.42em;
+    vertical-align:middle;
+    margin-left:0.12em;
+    transform-origin:center bottom;
+    animation:fireFlicker 0.8s ease-in-out infinite alternate;
+    filter:drop-shadow(0 0 10px rgba(206,124,28,0.35));
+  }
+  @keyframes fireFlicker {
+    0% { transform:scale(0.96) rotate(-4deg) translateY(0); }
+    50% { transform:scale(1.08) rotate(3deg) translateY(-2px); }
+    100% { transform:scale(1.18) rotate(-2deg) translateY(1px); }
   }
   .lede{
     font-size:17.5px;
     color:var(--ink-soft);
-    max-width:46ch;
+    max-width:68ch;
     margin:0 0 30px;
   }
   .cta-row{
@@ -164,77 +201,33 @@
   .stats{
     margin-top:52px;
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(4, minmax(0, 1fr));
     border-top:1px solid var(--line-strong);
+    border-bottom:1px solid var(--line-strong);
   }
   @media (max-width:640px){
     .stats{grid-template-columns:repeat(2,1fr);}
   }
   .stat{
-    padding:16px 18px 0 0;
+    padding:18px 18px 0 18px;
+    border-left:1px solid var(--line);
     border-right:1px solid var(--line);
+    min-height:150px;
   }
+  .stat:first-child{border-left:none;}
   .stat:last-child{border-right:none;}
   .stat .num{
     font-family:var(--mono);
     font-size:22px;
     font-weight:500;
     color:var(--ink);
+    display:block;
   }
   .stat .label{
     font-size:12.5px;
     color:var(--ink-faint);
     margin-top:4px;
   }
-
-  /* diagram */
-  .diagram-frame{
-    border:1px solid var(--line-strong);
-    background:var(--panel);
-    border-radius:var(--radius);
-    padding:18px;
-  }
-  .diagram-cap{
-    font-family:var(--mono);
-    font-size:11.5px;
-    color:var(--ink-faint);
-    margin:10px 2px 0;
-  }
-  svg.diagram text{
-    font-family:var(--mono);
-    fill:var(--ink);
-  }
-  .node-rect{
-    fill:var(--paper);
-    stroke:var(--ink);
-    stroke-width:1.2;
-  }
-  .node-rect.accent{
-    stroke:var(--accent-ink);
-  }
-  .edge{
-    stroke:var(--ink-soft);
-    stroke-width:1.2;
-    fill:none;
-    stroke-dasharray:400;
-    stroke-dashoffset:400;
-    animation:draw 1.6s ease forwards;
-  }
-  .edge.d2{animation-delay:.25s;}
-  .edge.d3{animation-delay:.5s;}
-  .edge.d4{animation-delay:.75s;}
-  .edge.d5{animation-delay:1s;}
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
-  .node{
-    opacity:0;
-    animation:appear .4s ease forwards;
-  }
-  .node.n2{animation-delay:.2s;}
-  .node.n3{animation-delay:.45s;}
-  .node.n4{animation-delay:.7s;}
-  .node.n5{animation-delay:.95s;}
-  .node.n6{animation-delay:1.2s;}
-  @keyframes appear{ to{opacity:1;} }
 
   /* ---------- Section shell ---------- */
   section{
@@ -307,7 +300,7 @@
   /* ---------- Projects ---------- */
   .project{
     display:grid;
-    grid-template-columns:1fr 320px;
+    grid-template-columns:1fr 360px;
     gap:40px;
     padding:40px 0;
     border-top:1px solid var(--line);
@@ -355,13 +348,20 @@
     border:1px solid var(--line-strong);
     background:var(--panel);
     border-radius:var(--radius);
-    padding:14px;
     align-self:start;
   }
   .mini-diagram svg text{font-family:var(--mono); font-size:9.5px; fill:var(--ink);}
   .mini-diagram .box{fill:var(--paper); stroke:var(--ink); stroke-width:1;}
   .mini-diagram .box.acc{stroke:var(--accent-ink);}
   .mini-diagram line{stroke:var(--ink-soft); stroke-width:1;}
+  .mini-diagram img{
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:2px;
+    object-fit:contain;
+    background:var(--paper);
+  }
 
   /* other builds */
   .lab-list{
@@ -399,7 +399,7 @@
   /* ---------- Skills ---------- */
   .skills-grid{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(3, 1fr);
     gap:32px;
   }
   @media (max-width:760px){
@@ -456,6 +456,42 @@
   .edu-item .school{font-weight:600; font-size:15.5px;}
   .edu-item .deg{color:var(--ink-soft); font-size:14px; margin-top:2px;}
   .edu-item .when{font-family:var(--mono); font-size:12.5px; color:var(--ink-faint); margin-top:4px;}
+
+  /* ---------- Personal ---------- */
+  .personal{
+    padding:64px 0 20px;
+  }
+  .personal-grid{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:28px;
+    align-items:start;
+    margin-top:-8px;
+  }
+  @media (max-width:760px){
+    .personal-grid{grid-template-columns:1fr;}
+  }
+  .personal-copy{
+    font-size:17px;
+    line-height:1.7;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  .personal-points{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:grid;
+    gap:10px;
+  }
+  .personal-points li{
+    padding:10px 0;
+    border-top:1px solid var(--line);
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .personal-points li:first-child{border-top:none;}
 
   /* ---------- Contact / Footer ---------- */
   footer{
@@ -527,13 +563,13 @@
 
 <header class="top">
   <div class="top-inner">
-    <a class="mark" href="#top">Manikesh<span>.</span></a>
+    <a class="mark" href="#top">⚡ Manikesh Gudipati<span>.</span></a>
     <nav class="primary">
-      <a href="#work">Work</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#achievements">Achievements</a>
-      <a href="#contact">Contact</a>
+      <a href="#work">💼 Work</a>
+      <a href="#projects">🚀 Projects</a>
+      <a href="#skills">🧠 Skills</a>
+      <a href="#achievements">🏆 Achievements</a>
+      <a href="#contact">📬 Contact</a>
     </nav>
   </div>
 </header>
@@ -543,54 +579,25 @@
   <!-- HERO -->
   <section class="hero" style="border-top:none;">
     <div class="hero-grid">
+      <div class="hero-visual">
+        <img src="img2.jpeg" alt="Gudipati Manikesh" />
+      </div>
+
       <div>
-        <p class="eyebrow">Software Development Engineer · Hyderabad, India</p>
-        <h1>I build backend systems that keep working when everyone shows up at once.</h1>
-        <p class="lede">Currently shipping cloud-native platforms and multi-agent AI systems at TCS Prime. Previously researched NLP at IIT Guwahati. I like problems that start out ambiguous and end up load-bearing.</p>
+        <p class="eyebrow">Software Development Engineer (AI Engineer)· Bangalore, India</p>
+        <h1>I build the brains behind the software — AI systems, products, and experiences that work when the pressure is on <span class="fire" aria-hidden="true">🔥</span></h1>
         <div class="cta-row">
           <a class="btn solid" href="#projects">See the work</a>
           <a class="btn ghost" href="Manikesh_CV_SDE.pdf" download>Download résumé</a>
         </div>
 
         <div class="stats">
-          <div class="stat"><div class="num">8,000+</div><div class="label">users on a platform I shipped</div></div>
-          <div class="stat"><div class="num">97%</div><div class="label">accuracy, TikTok sentiment model</div></div>
-          <div class="stat"><div class="num">5★</div><div class="label">HackerRank problem solving</div></div>
           <div class="stat"><div class="num">AIR 5,435</div><div class="label">GATE 2025, DA paper</div></div>
+          <div class="stat"><div class="num">CCDV-F</div><div class="label">Claude Certified Developer</div></div>
+          <div class="stat"><div class="num">LOR</div><div class="label">Issued by NULL Class Pvt. Ltd.</div></div>
+          <div class="stat"><div class="num">5★</div><div class="label">HackerRank Problem Solver</div></div>
+          
         </div>
-      </div>
-
-      <div>
-        <div class="diagram-frame">
-          <svg class="diagram" viewBox="0 0 340 300" width="100%" role="img" aria-label="Diagram of the Maitree examination platform architecture: web and mobile clients connect through REST APIs to a FastAPI backend on Google Cloud Functions, which reads and writes to Google Firestore and powers an analytics dashboard.">
-            <rect class="node-rect node" x="14" y="16" width="130" height="34" rx="3"/>
-            <text class="node" x="79" y="37" text-anchor="middle" font-size="10">Web + Mobile client</text>
-
-            <path class="edge" d="M79,50 L79,80"/>
-
-            <rect class="node-rect node n2 accent" x="14" y="82" width="130" height="34" rx="3"/>
-            <text class="node n2" x="79" y="103" text-anchor="middle" font-size="10">FastAPI · REST layer</text>
-
-            <path class="edge d2" d="M79,116 L79,146"/>
-
-            <rect class="node-rect node n3" x="14" y="148" width="130" height="34" rx="3"/>
-            <text class="node n3" x="79" y="169" text-anchor="middle" font-size="10">Cloud Functions</text>
-
-            <path class="edge d3" d="M79,182 L79,212"/>
-
-            <rect class="node-rect node n4" x="14" y="214" width="130" height="34" rx="3"/>
-            <text class="node n4" x="79" y="235" text-anchor="middle" font-size="10">Firestore</text>
-
-            <path class="edge d4" d="M144,99 L206,99 L206,63"/>
-            <rect class="node-rect node n5" x="196" y="30" width="130" height="34" rx="3"/>
-            <text class="node n5" x="261" y="51" text-anchor="middle" font-size="10">Admin dashboard</text>
-
-            <path class="edge d5" d="M206,168 L326,168 L326,231 L206,231"/>
-            <rect class="node-rect node n6" x="196" y="214" width="130" height="34" rx="3"/>
-            <text class="node n6" x="261" y="235" text-anchor="middle" font-size="10">Region/score analytics</text>
-          </svg>
-        </div>
-        <p class="diagram-cap">Simplified architecture — Maitree, the exam platform behind the 8,000+ number above.</p>
       </div>
     </div>
   </section>
@@ -598,14 +605,14 @@
   <!-- EXPERIENCE -->
   <section id="work">
     <div class="section-head">
-      <h2>Work</h2>
+      <h2>💼 Work</h2>
       <span class="section-num">2024 — present</span>
     </div>
     <div class="timeline">
       <div class="tl-item">
-        <div class="tl-when">2025 — Present</div>
+        <div class="tl-when">July 2025 — Present</div>
         <div>
-          <p class="tl-role">Software Development Engineer, AI Engineer</p>
+          <p class="tl-role">💻 Software Development Engineer, AI Engineer</p>
           <p class="tl-org">Tata Consultancy Services · TCS Prime</p>
           <ul>
             <li>Architected and shipped production distributed systems from broadly defined problems through to deployment, including a cloud-native exam platform and an enterprise multi-agent AI platform.</li>
@@ -617,7 +624,7 @@
       <div class="tl-item">
         <div class="tl-when">May — Jun 2024</div>
         <div>
-          <p class="tl-role">Research Intern</p>
+          <p class="tl-role">📁 Summer Internship</p>
           <p class="tl-org">Indian Institute of Technology, Guwahati</p>
           <ul>
             <li>Built an NLP sentiment analysis system over 9,000+ TikTok reviews (5,040 positive · 2,835 neutral · 1,125 negative).</li>
@@ -629,7 +636,7 @@
       <div class="tl-item">
         <div class="tl-when">Apr — May 2024</div>
         <div>
-          <p class="tl-role">Data Science Intern</p>
+          <p class="tl-role">📊 Data Science Intern</p>
           <p class="tl-org">Null Class Pvt. Ltd. · Remote</p>
           <ul>
             <li>Trained age and gender detection models on 23,700+ labeled image samples with Python and scikit-learn, reaching 90%+ accuracy.</li>
@@ -649,7 +656,7 @@
 
     <div class="project">
       <div>
-        <p class="project-tag">Production system</p>
+        <p class="project-tag">🚀 Production system</p>
         <h3>Maitree — Online Examination Platform</h3>
         <p class="desc">A fully cloud-native exam platform for 8,000+ employees across countries and time zones, replacing a legacy center-based process. React.js frontend, FastAPI backend, deployed on Google Cloud Functions with Firestore for storage and the frontend hosted on Azure. Ships as both a web app and a mobile app on a shared API layer, with role-based dashboards for region-wise and score-wise analytics.</p>
         <p class="impact">Impact: cut venue and logistics costs to zero and made global, simultaneous participation possible.</p>
@@ -658,45 +665,28 @@
         </div>
       </div>
       <div class="mini-diagram">
-        <svg viewBox="0 0 200 180" width="100%">
-          <rect class="box acc" x="20" y="10" width="160" height="26" rx="2"/><text x="100" y="27" text-anchor="middle">Web / Mobile</text>
-          <line x1="100" y1="36" x2="100" y2="58"/>
-          <rect class="box" x="20" y="60" width="160" height="26" rx="2"/><text x="100" y="77" text-anchor="middle">FastAPI</text>
-          <line x1="100" y1="86" x2="100" y2="108"/>
-          <rect class="box" x="20" y="110" width="72" height="26" rx="2"/><text x="56" y="127" text-anchor="middle">Firestore</text>
-          <rect class="box" x="108" y="110" width="72" height="26" rx="2"/><text x="144" y="127" text-anchor="middle">Analytics</text>
-          <line x1="56" y1="136" x2="56" y2="150"/><line x1="144" y1="136" x2="144" y2="150"/>
-          <text x="100" y="166" text-anchor="middle" fill="#7C8891" font-size="8">8,000+ concurrent users</text>
-        </svg>
+        <img src="img6.jpeg" alt="Maitree system architecture" />
       </div>
     </div>
 
     <div class="project">
       <div>
-        <p class="project-tag">Production system</p>
+        <p class="project-tag">🧩 Production system</p>
         <h3>AURA AI — Enterprise Development Platform</h3>
-        <p class="desc">A unified interface where users generate websites, run data analysis, create images, and automate development workflows. Multi-agent orchestration with LangChain and LangGraph on top of OpenAI LLMs, wired into a React.js frontend and FastAPI backend, with role-based experiences for developers, analysts, and designers. Includes secure file uploads, cloud storage, an in-browser code editor, and deployable generated source code.</p>
+        <p class="desc">A unified interface where users generate websites, run data analysis, create images, and automate development workflows. Multi-agent orchestration with LangChain and LangGraph on top of OpenAI LLMs, wired into a React.js frontend and FastAPI backend, with role-based experiences for developers, analysts, and designers. Includes secure file uploads.</p>
         <p class="impact">Impact: replaced several standalone AI tools with one platform, speeding up prototyping and developer output.</p>
         <div class="stack">
           <span class="chip">React.js</span><span class="chip">FastAPI</span><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">OpenAI</span><span class="chip">Firestore</span>
         </div>
       </div>
       <div class="mini-diagram">
-        <svg viewBox="0 0 200 180" width="100%">
-          <rect class="box acc" x="55" y="8" width="90" height="26" rx="2"/><text x="100" y="25" text-anchor="middle">Orchestrator</text>
-          <line x1="100" y1="34" x2="30" y2="60"/><line x1="100" y1="34" x2="100" y2="60"/><line x1="100" y1="34" x2="170" y2="60"/>
-          <rect class="box" x="4" y="62" width="52" height="26" rx="2"/><text x="30" y="79" text-anchor="middle" font-size="8">Web agent</text>
-          <rect class="box" x="74" y="62" width="52" height="26" rx="2"/><text x="100" y="79" text-anchor="middle" font-size="8">Data agent</text>
-          <rect class="box" x="144" y="62" width="52" height="26" rx="2"/><text x="170" y="79" text-anchor="middle" font-size="8">Image agent</text>
-          <line x1="30" y1="88" x2="100" y2="112"/><line x1="100" y1="88" x2="100" y2="112"/><line x1="170" y1="88" x2="100" y2="112"/>
-          <rect class="box" x="45" y="114" width="110" height="26" rx="2"/><text x="100" y="131" text-anchor="middle" font-size="8">Code + deploy output</text>
-        </svg>
+        <img src="img7.jpeg" alt="AURA AI system architecture" />
       </div>
     </div>
 
     <div class="project">
       <div>
-        <p class="project-tag">Applied ML</p>
+        <p class="project-tag">📊 Applied ML</p>
         <h3>TikTok Sentiment Analysis System</h3>
         <p class="desc">A sentiment classifier trained on 9,000+ TikTok reviews using TF-IDF vectorization and SVM, with preprocessing and sampling to handle class imbalance across positive, neutral, and negative reviews. Evaluated with classification reports, confusion matrices, precision/recall, and AUROC.</p>
         <p class="impact">Result: 97% accuracy, 0.97 weighted F1 score.</p>
@@ -705,33 +695,25 @@
         </div>
       </div>
       <div class="mini-diagram">
-        <svg viewBox="0 0 200 180" width="100%">
-          <rect class="box" x="20" y="14" width="160" height="24" rx="2"/><text x="100" y="30" text-anchor="middle" font-size="8">9,000+ reviews</text>
-          <line x1="100" y1="38" x2="100" y2="58"/>
-          <rect class="box" x="20" y="60" width="160" height="24" rx="2"/><text x="100" y="76" text-anchor="middle" font-size="8">TF-IDF vectorize</text>
-          <line x1="100" y1="84" x2="100" y2="104"/>
-          <rect class="box acc" x="20" y="106" width="160" height="24" rx="2"/><text x="100" y="122" text-anchor="middle" font-size="8">SVM classifier</text>
-          <line x1="100" y1="130" x2="100" y2="150"/>
-          <text x="100" y="164" text-anchor="middle" fill="#7C8891" font-size="8">97% accuracy · 0.97 F1</text>
-        </svg>
+        <img src="img8.jpeg" alt="TikTok sentiment analysis system architecture" />
       </div>
     </div>
 
     <div style="margin-top:16px;">
-      <p class="project-tag">Also on GitHub</p>
+      <p class="project-tag">🛰️ Also on GitHub</p>
       <div class="lab-list">
         <div class="lab-item">
-          <h4>ChaseAI</h4>
+          <h4>🕹️ ChaseAI</h4>
           <p>A chase game with pathfinding driven by the A* algorithm.</p>
           <a href="https://github.com/Manikanny/ChaseAI" target="_blank" rel="noopener">View repository</a>
         </div>
         <div class="lab-item">
-          <h4>Student Performance Prediction</h4>
+          <h4>📈 Student Performance Prediction</h4>
           <p>Predicts student outcomes with linear regression and decision-tree models.</p>
           <a href="https://github.com/Manikanny/StudentPerformancePrediction" target="_blank" rel="noopener">View repository</a>
         </div>
         <div class="lab-item">
-          <h4>Diabetes Prediction</h4>
+          <h4>🩺 Diabetes Prediction</h4>
           <p>A classification model that flags diabetes risk from patient attributes.</p>
           <a href="https://github.com/Manikanny/DiabetesPrediction" target="_blank" rel="noopener">View repository</a>
         </div>
@@ -747,39 +729,29 @@
     </div>
     <div class="skills-grid">
       <div class="skill-cat">
-        <h4>Languages</h4>
+        <h4>💻 Languages</h4>
         <ul>
-          <li>Java</li><li>Python</li><li>C / C++</li><li>SQL</li><li>JavaScript</li>
+          <li>Python</li><li>Java</li><li>C </li><li>SQL</li><li>JavaScript</li>
         </ul>
       </div>
       <div class="skill-cat">
-        <h4>Systems &amp; cloud</h4>
-        <ul>
-          <li>Distributed / service-oriented architecture</li>
-          <li>REST APIs</li>
-          <li>Google Cloud Functions, Firestore</li>
-          <li>Azure</li>
-          <li>Scalable system design</li>
-        </ul>
-      </div>
-      <div class="skill-cat">
-        <h4>AI &amp; ML</h4>
+        <h4>🧠 AI &amp; ML</h4>
         <ul>
           <li>Machine learning, deep learning</li>
-          <li>NLP</li>
+          <li>NLP , OpenCV</li>
           <li>LangChain, LangGraph</li>
-          <li>scikit-learn, TensorFlow</li>
+          <li>scikit-learn</li>
           <li>Pandas, NumPy</li>
         </ul>
       </div>
       <div class="skill-cat">
-        <h4>Core CS &amp; tools</h4>
+        <h4>⚙️ Core CS &amp; tools</h4>
         <ul>
           <li>Data structures &amp; algorithms</li>
-          <li>OOD, complexity analysis</li>
-          <li>DBMS, OS, networks</li>
+          <li>OOPS, Complexity analysis</li>
+          <li>DBMS, OS, Computer Networks</li>
           <li>React.js, FastAPI</li>
-          <li>Git, GitHub Actions</li>
+          <li>Git, GitHub</li>
         </ul>
       </div>
     </div>
@@ -791,14 +763,13 @@
       <h2>Achievements</h2>
       <span class="section-num">competitions &amp; recognition</span>
     </div>
-    <div class="ach-list">
-      <div class="ach-item"><span class="ach-tag">GATE 2025</span><span>Secured All India Rank 5,435 in the DA paper among thousands of candidates.</span></div>
-      <div class="ach-item"><span class="ach-tag">ICAMSD 2025</span><span>Received Best Research Paper recognition at the International Conference on AI and ML for Sustainable Development.</span></div>
-      <div class="ach-item"><span class="ach-tag">Flipkart Grid 5.0</span><span>Qualified for Round 2 of the national-level software engineering and innovation competition.</span></div>
-      <div class="ach-item"><span class="ach-tag">CodeKaze 2023</span><span>Attained All India Rank 5,884, run by Naukri Engineer's Week.</span></div>
-      <div class="ach-item"><span class="ach-tag">HackerRank</span><span>Earned the 5-star Problem Solving badge for consistent algorithmic performance.</span></div>
-      <div class="ach-item"><span class="ach-tag">Hackathons</span><span>Competed at TRI-NIT and NNRG, both focused on AI and software innovation.</span></div>
-    </div>
+    <div class="ach-list"> 
+      <div class="ach-item"><span class="ach-tag">🏆 GATE 2025</span><span>Secured All India Rank 5,435 in the DA paper among thousands of candidates.</span></div> 
+      <div class="ach-item"><span class="ach-tag">🤖 CCDV-F</span><span>Earned the Claude Certified Developer – Foundations certification.</span></div>
+       <div class="ach-item"><span class="ach-tag">📘 ICAMSD 2025</span><span>Received the Best Research Paper Award at the International Conference on AI and ML for Sustainable Development.</span></div> 
+       <div class="ach-item"><span class="ach-tag">🧠 IIT Guwahati</span><span>Completed a Summer Internship at IIT Guwahati, working on an AI/ML-focused research project.</span></div>
+        <div class="ach-item"><span class="ach-tag">✨ LOR</span><span>Received a Letter of Recommendation from Null Class Pvt. Ltd. for contributions and performance during the internship.</span></div> 
+        <div class="ach-item"><span class="ach-tag">⭐ Star of the Month</span><span>Received the Star of the Month Award from TCS for August 2025, nominated by the Manager for outstanding performance and contribution.</span></div> </div>
   </section>
 
   <!-- EDUCATION -->
@@ -808,29 +779,53 @@
       <span class="section-num">2019 — 2025</span>
     </div>
     <div class="edu-item">
-      <div class="school">VNR Vignana Jyothi Institute of Engineering and Technology</div>
+      <div class="school">🎓 VNR Vignana Jyothi Institute of Engineering and Technology</div>
       <div class="deg">B.Tech, Computer Science and Engineering (AIML) — CGPA 8.2 / 10</div>
       <div class="when">2021 — 2025 · Hyderabad, India</div>
     </div>
     <div class="edu-item">
-      <div class="school">Narayana Junior College, TSBIE</div>
+      <div class="school">📚 Narayana Junior College, TSBIE</div>
       <div class="deg">Intermediate — 97.6%</div>
       <div class="when">2019 — 2021 · Hyderabad, India</div>
+    </div>
+    <div class="edu-item">
+      <div class="school">🏫 Kendriya Vidyalaya Sangathan - Nalgonda, CBSE</div>
+      <div class="deg">School — 86.4%</div>
+      <div class="when">2012 — 2019 · Nalgonda, India</div>
+    </div>
+  </section>
+
+  <!-- PERSONAL -->
+  <section id="personal" class="personal">
+    <div class="section-head">
+      <h2>Personal</h2>
+      <span class="section-num">off-duty mode</span>
+    </div>
+    <div class="personal-grid">
+      <p class="personal-copy">
+        I’m not just a code warrior in a hoodie — I’m the guy who turns a weekend into a story 🎬. Movie nights are my training ground 🎞️, long trips are my reset button ✈️, music is my fuel 🎶, and dance is how I keep my brain from taking itself too seriously 💃. My friends call it chaos; I call it balance 😄. Because the best builders aren’t just sharp — they’re alive, curious, and a little bit legendary 🦾.
+      </p>
+      <ul class="personal-points">
+        <li>🎬 Movie freak with a top-tier watchlist and zero chill.</li>
+        <li>✈️ Frequent traveller with a passport full of energy and stories.</li>
+        <li>🎶 Music in my veins, dance in my soul, chaos in my charm.</li>
+        <li>👯 Friends first, always ready for a laugh and a little adventure.</li>
+      </ul>
     </div>
   </section>
 
   <!-- CONTACT -->
   <footer id="contact">
-    <p class="contact-headline">Building something that needs to hold up under load? Let's talk.</p>
+    <p class="contact-headline">💬 Building something that needs to hold up under load? Let's talk.</p>
     <div class="contact-links">
-      <button class="copy-btn" id="emailBtn">gudipatimanikesh3@gmail.com</button>
-      <a href="tel:+919440934850">+91 94409 34850</a>
-      <a href="https://www.linkedin.com/in/gudipati-manikesh-708006259/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/Manikanny" target="_blank" rel="noopener">GitHub</a>
+      <button class="copy-btn" id="emailBtn">📧 gudipatimanikesh3@gmail.com</button>
+      <a href="tel:+919440934850">📞 +91 94409 34850</a>
+      <a href="https://www.linkedin.com/in/gudipati-manikesh-708006259/" target="_blank" rel="noopener">💼 LinkedIn</a>
+      <a href="https://github.com/Manikanny" target="_blank" rel="noopener">🐙 GitHub</a>
     </div>
     <div class="foot-meta">
-      <span>Gudipati Manikesh — Hyderabad, India</span>
-      <span>© 2026</span>
+      <span>With Love Manikesh ❤️</span>
+      <span>Signing Off 🫡</span>
     </div>
   </footer>
 
