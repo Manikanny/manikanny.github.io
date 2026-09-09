@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gudipati Manikesh — Software Development Engineer</title>
+<meta name="description" content="Gudipati Manikesh — Software Development Engineer building cloud-native distributed systems and multi-agent AI platforms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF0EA;
+    --panel:#E4E7DE;
+    --ink:#141F29;
+    --ink-soft:#4B5A67;
+    --ink-faint:#7C8891;
+    --accent:#CE7C1C;
+    --accent-ink:#8F5511;
+    --teal:#3C6660;
+    --line:rgba(20,31,41,0.15);
+    --line-strong:rgba(20,31,41,0.30);
+    --radius:3px;
+    --mono:'IBM Plex Mono', ui-monospace, monospace;
+    --sans:'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001s !important; animation-iteration-count:1 !important; transition-duration:0.001s !important;}
+  }
+
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px),
+      var(--paper);
+    background-size:36px 36px, 36px 36px, auto;
+    color:var(--ink);
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  ::selection{background:var(--accent); color:var(--paper);}
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--accent-ink);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- Top bar ---------- */
+  header.top{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(238,240,234,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .top-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 28px;
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .mark{
+    font-family:var(--mono);
+    font-size:15px;
+    font-weight:500;
+    letter-spacing:0.01em;
+    text-decoration:none;
+  }
+  .mark span{color:var(--accent-ink);}
+  nav.primary{
+    display:flex;
+    gap:26px;
+  }
+  nav.primary a{
+    font-family:var(--mono);
+    font-size:13.5px;
+    text-decoration:none;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  nav.primary a:hover{color:var(--ink); border-color:var(--line-strong);}
+  @media (max-width:640px){
+    nav.primary{display:none;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:76px 0 40px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr; gap:36px;}
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:13.5px;
+    color:var(--accent-ink);
+    margin:0 0 18px;
+  }
+  h1{
+    font-family:var(--mono);
+    font-weight:500;
+    font-size:clamp(2.1rem, 4.6vw, 3.3rem);
+    line-height:1.14;
+    letter-spacing:-0.01em;
+    margin:0 0 22px;
+  }
+  .lede{
+    font-size:17.5px;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin:0 0 30px;
+  }
+  .cta-row{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--mono);
+    font-size:13.5px;
+    padding:11px 18px;
+    text-decoration:none;
+    border-radius:var(--radius);
+    border:1px solid var(--ink);
+    transition:background .15s ease, color .15s ease, transform .1s ease;
+  }
+  .btn.solid{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .btn.solid:hover{background:var(--accent-ink); border-color:var(--accent-ink); transform:translateY(-1px);}
+  .btn.ghost:hover{background:var(--ink); color:var(--paper); transform:translateY(-1px);}
+
+  /* stat row */
+  .stats{
+    margin-top:52px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid var(--line-strong);
+  }
+  @media (max-width:640px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+  }
+  .stat{
+    padding:16px 18px 0 0;
+    border-right:1px solid var(--line);
+  }
+  .stat:last-child{border-right:none;}
+  .stat .num{
+    font-family:var(--mono);
+    font-size:22px;
+    font-weight:500;
+    color:var(--ink);
+  }
+  .stat .label{
+    font-size:12.5px;
+    color:var(--ink-faint);
+    margin-top:4px;
+  }
+
+  /* diagram */
+  .diagram-frame{
+    border:1px solid var(--line-strong);
+    background:var(--panel);
+    border-radius:var(--radius);
+    padding:18px;
+  }
+  .diagram-cap{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--ink-faint);
+    margin:10px 2px 0;
+  }
+  svg.diagram text{
+    font-family:var(--mono);
+    fill:var(--ink);
+  }
+  .node-rect{
+    fill:var(--paper);
+    stroke:var(--ink);
+    stroke-width:1.2;
+  }
+  .node-rect.accent{
+    stroke:var(--accent-ink);
+  }
+  .edge{
+    stroke:var(--ink-soft);
+    stroke-width:1.2;
+    fill:none;
+    stroke-dasharray:400;
+    stroke-dashoffset:400;
+    animation:draw 1.6s ease forwards;
+  }
+  .edge.d2{animation-delay:.25s;}
+  .edge.d3{animation-delay:.5s;}
+  .edge.d4{animation-delay:.75s;}
+  .edge.d5{animation-delay:1s;}
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  .node{
+    opacity:0;
+    animation:appear .4s ease forwards;
+  }
+  .node.n2{animation-delay:.2s;}
+  .node.n3{animation-delay:.45s;}
+  .node.n4{animation-delay:.7s;}
+  .node.n5{animation-delay:.95s;}
+  .node.n6{animation-delay:1.2s;}
+  @keyframes appear{ to{opacity:1;} }
+
+  /* ---------- Section shell ---------- */
+  section{
+    padding:64px 0;
+    border-top:1px solid var(--line);
+    scroll-margin-top:76px;
+  }
+  footer{
+    scroll-margin-top:76px;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:36px;
+  }
+  .section-head h2{
+    font-family:var(--mono);
+    font-weight:500;
+    font-size:1.5rem;
+    margin:0;
+  }
+  .section-num{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-faint);
+  }
+
+  /* ---------- Experience timeline ---------- */
+  .timeline{
+    display:flex;
+    flex-direction:column;
+  }
+  .tl-item{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:24px;
+    padding:26px 0;
+    border-top:1px solid var(--line);
+  }
+  .tl-item:first-child{border-top:none;}
+  @media (max-width:640px){
+    .tl-item{grid-template-columns:1fr;}
+  }
+  .tl-when{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--ink-faint);
+    padding-top:2px;
+  }
+  .tl-role{
+    font-size:17px;
+    font-weight:600;
+    margin:0 0 2px;
+  }
+  .tl-org{
+    font-family:var(--mono);
+    font-size:13.5px;
+    color:var(--teal);
+    margin:0 0 12px;
+  }
+  .tl-item ul{
+    margin:0;
+    padding-left:18px;
+    color:var(--ink-soft);
+  }
+  .tl-item li{margin-bottom:6px;}
+
+  /* ---------- Projects ---------- */
+  .project{
+    display:grid;
+    grid-template-columns:1fr 320px;
+    gap:40px;
+    padding:40px 0;
+    border-top:1px solid var(--line);
+  }
+  .project:first-child{border-top:none;}
+  @media (max-width:860px){
+    .project{grid-template-columns:1fr;}
+  }
+  .project-tag{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--accent-ink);
+    margin:0 0 8px;
+  }
+  .project h3{
+    font-size:22px;
+    margin:0 0 6px;
+  }
+  .project .impact{
+    font-size:14.5px;
+    color:var(--teal);
+    margin:14px 0 0;
+    padding-top:14px;
+    border-top:1px dashed var(--line-strong);
+  }
+  .project p.desc{
+    color:var(--ink-soft);
+    margin:0 0 14px;
+  }
+  .stack{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:16px;
+  }
+  .chip{
+    font-family:var(--mono);
+    font-size:11.5px;
+    padding:5px 9px;
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius);
+    color:var(--ink-soft);
+  }
+  .mini-diagram{
+    border:1px solid var(--line-strong);
+    background:var(--panel);
+    border-radius:var(--radius);
+    padding:14px;
+    align-self:start;
+  }
+  .mini-diagram svg text{font-family:var(--mono); font-size:9.5px; fill:var(--ink);}
+  .mini-diagram .box{fill:var(--paper); stroke:var(--ink); stroke-width:1;}
+  .mini-diagram .box.acc{stroke:var(--accent-ink);}
+  .mini-diagram line{stroke:var(--ink-soft); stroke-width:1;}
+
+  /* other builds */
+  .lab-list{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line-strong);
+    border:1px solid var(--line-strong);
+    margin-top:8px;
+  }
+  @media (max-width:760px){
+    .lab-list{grid-template-columns:1fr;}
+  }
+  .lab-item{
+    background:var(--paper);
+    padding:20px;
+  }
+  .lab-item h4{
+    margin:0 0 8px;
+    font-size:15px;
+  }
+  .lab-item p{
+    margin:0 0 12px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .lab-item a{
+    font-family:var(--mono);
+    font-size:12.5px;
+    text-decoration:none;
+    border-bottom:1px solid var(--line-strong);
+  }
+  .lab-item a:hover{border-color:var(--ink);}
+
+  /* ---------- Skills ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:32px;
+  }
+  @media (max-width:760px){
+    .skills-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  .skill-cat h4{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--accent-ink);
+    margin:0 0 12px;
+    font-weight:500;
+  }
+  .skill-cat ul{
+    list-style:none;
+    margin:0; padding:0;
+    color:var(--ink-soft);
+    font-size:14px;
+  }
+  .skill-cat li{
+    padding:6px 0;
+    border-top:1px solid var(--line);
+  }
+  .skill-cat li:first-child{border-top:none;}
+
+  /* ---------- Achievements ---------- */
+  .ach-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .ach-item{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:20px;
+    padding:16px 0;
+    border-top:1px solid var(--line);
+    font-size:14.5px;
+  }
+  .ach-item:first-child{border-top:none;}
+  @media (max-width:640px){
+    .ach-item{grid-template-columns:1fr; gap:4px;}
+  }
+  .ach-tag{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-faint);
+  }
+
+  /* ---------- Education ---------- */
+  .edu-item{
+    padding:18px 0;
+    border-top:1px solid var(--line);
+  }
+  .edu-item:first-child{border-top:none;}
+  .edu-item .school{font-weight:600; font-size:15.5px;}
+  .edu-item .deg{color:var(--ink-soft); font-size:14px; margin-top:2px;}
+  .edu-item .when{font-family:var(--mono); font-size:12.5px; color:var(--ink-faint); margin-top:4px;}
+
+  /* ---------- Contact / Footer ---------- */
+  footer{
+    padding:64px 0 48px;
+    border-top:1px solid var(--line);
+  }
+  .contact-headline{
+    font-family:var(--mono);
+    font-weight:500;
+    font-size:clamp(1.7rem, 4vw, 2.6rem);
+    margin:0 0 26px;
+    max-width:18ch;
+  }
+  .contact-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-bottom:44px;
+  }
+  .contact-links a{
+    font-family:var(--mono);
+    font-size:13.5px;
+    text-decoration:none;
+    padding:11px 18px;
+    border:1px solid var(--ink);
+    border-radius:var(--radius);
+    transition:background .15s ease, color .15s ease;
+  }
+  .contact-links a:hover{background:var(--ink); color:var(--paper);}
+  .copy-btn{
+    background:none;
+    cursor:pointer;
+    font-family:var(--mono);
+  }
+  .foot-meta{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink-faint);
+    border-top:1px solid var(--line);
+    padding-top:22px;
+  }
+  .toast{
+    position:fixed;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%) translateY(12px);
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--mono);
+    font-size:13px;
+    padding:10px 16px;
+    border-radius:var(--radius);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease;
+    z-index:99;
+  }
+  .toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <a class="mark" href="#top">Manikesh<span>.</span></a>
+    <nav class="primary">
+      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top" class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none;">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Software Development Engineer · Hyderabad, India</p>
+        <h1>I build backend systems that keep working when everyone shows up at once.</h1>
+        <p class="lede">Currently shipping cloud-native platforms and multi-agent AI systems at TCS Prime. Previously researched NLP at IIT Guwahati. I like problems that start out ambiguous and end up load-bearing.</p>
+        <div class="cta-row">
+          <a class="btn solid" href="#projects">See the work</a>
+          <a class="btn ghost" href="Manikesh_CV_SDE.pdf" download>Download résumé</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><div class="num">8,000+</div><div class="label">users on a platform I shipped</div></div>
+          <div class="stat"><div class="num">97%</div><div class="label">accuracy, TikTok sentiment model</div></div>
+          <div class="stat"><div class="num">5★</div><div class="label">HackerRank problem solving</div></div>
+          <div class="stat"><div class="num">AIR 5,435</div><div class="label">GATE 2025, DA paper</div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="diagram-frame">
+          <svg class="diagram" viewBox="0 0 340 300" width="100%" role="img" aria-label="Diagram of the Maitree examination platform architecture: web and mobile clients connect through REST APIs to a FastAPI backend on Google Cloud Functions, which reads and writes to Google Firestore and powers an analytics dashboard.">
+            <rect class="node-rect node" x="14" y="16" width="130" height="34" rx="3"/>
+            <text class="node" x="79" y="37" text-anchor="middle" font-size="10">Web + Mobile client</text>
+
+            <path class="edge" d="M79,50 L79,80"/>
+
+            <rect class="node-rect node n2 accent" x="14" y="82" width="130" height="34" rx="3"/>
+            <text class="node n2" x="79" y="103" text-anchor="middle" font-size="10">FastAPI · REST layer</text>
+
+            <path class="edge d2" d="M79,116 L79,146"/>
+
+            <rect class="node-rect node n3" x="14" y="148" width="130" height="34" rx="3"/>
+            <text class="node n3" x="79" y="169" text-anchor="middle" font-size="10">Cloud Functions</text>
+
+            <path class="edge d3" d="M79,182 L79,212"/>
+
+            <rect class="node-rect node n4" x="14" y="214" width="130" height="34" rx="3"/>
+            <text class="node n4" x="79" y="235" text-anchor="middle" font-size="10">Firestore</text>
+
+            <path class="edge d4" d="M144,99 L206,99 L206,63"/>
+            <rect class="node-rect node n5" x="196" y="30" width="130" height="34" rx="3"/>
+            <text class="node n5" x="261" y="51" text-anchor="middle" font-size="10">Admin dashboard</text>
+
+            <path class="edge d5" d="M206,168 L326,168 L326,231 L206,231"/>
+            <rect class="node-rect node n6" x="196" y="214" width="130" height="34" rx="3"/>
+            <text class="node n6" x="261" y="235" text-anchor="middle" font-size="10">Region/score analytics</text>
+          </svg>
+        </div>
+        <p class="diagram-cap">Simplified architecture — Maitree, the exam platform behind the 8,000+ number above.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="work">
+    <div class="section-head">
+      <h2>Work</h2>
+      <span class="section-num">2024 — present</span>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-when">2025 — Present</div>
+        <div>
+          <p class="tl-role">Software Development Engineer, AI Engineer</p>
+          <p class="tl-org">Tata Consultancy Services · TCS Prime</p>
+          <ul>
+            <li>Architected and shipped production distributed systems from broadly defined problems through to deployment, including a cloud-native exam platform and an enterprise multi-agent AI platform.</li>
+            <li>Built backend services and REST APIs in Python and FastAPI, deployed across Google Cloud Functions and Azure, applying object-oriented design for maintainability and fault tolerance.</li>
+            <li>Worked in an agile, cross-disciplinary team on weekly release cycles, with CI/CD pipelines on GitHub Actions.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">May — Jun 2024</div>
+        <div>
+          <p class="tl-role">Research Intern</p>
+          <p class="tl-org">Indian Institute of Technology, Guwahati</p>
+          <ul>
+            <li>Built an NLP sentiment analysis system over 9,000+ TikTok reviews (5,040 positive · 2,835 neutral · 1,125 negative).</li>
+            <li>Reached 97% accuracy and a 0.97 weighted F1 score using TF-IDF vectorization and SVM classification.</li>
+            <li>Evaluated the model with classification reports, confusion matrices, and AUROC analysis.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">Apr — May 2024</div>
+        <div>
+          <p class="tl-role">Data Science Intern</p>
+          <p class="tl-org">Null Class Pvt. Ltd. · Remote</p>
+          <ul>
+            <li>Trained age and gender detection models on 23,700+ labeled image samples with Python and scikit-learn, reaching 90%+ accuracy.</li>
+            <li>Shipped a real-time Streamlit interface for live prediction and visualization.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <span class="section-num">selected</span>
+    </div>
+
+    <div class="project">
+      <div>
+        <p class="project-tag">Production system</p>
+        <h3>Maitree — Online Examination Platform</h3>
+        <p class="desc">A fully cloud-native exam platform for 8,000+ employees across countries and time zones, replacing a legacy center-based process. React.js frontend, FastAPI backend, deployed on Google Cloud Functions with Firestore for storage and the frontend hosted on Azure. Ships as both a web app and a mobile app on a shared API layer, with role-based dashboards for region-wise and score-wise analytics.</p>
+        <p class="impact">Impact: cut venue and logistics costs to zero and made global, simultaneous participation possible.</p>
+        <div class="stack">
+          <span class="chip">React.js</span><span class="chip">FastAPI</span><span class="chip">Google Cloud Functions</span><span class="chip">Firestore</span><span class="chip">Azure</span><span class="chip">REST APIs</span>
+        </div>
+      </div>
+      <div class="mini-diagram">
+        <svg viewBox="0 0 200 180" width="100%">
+          <rect class="box acc" x="20" y="10" width="160" height="26" rx="2"/><text x="100" y="27" text-anchor="middle">Web / Mobile</text>
+          <line x1="100" y1="36" x2="100" y2="58"/>
+          <rect class="box" x="20" y="60" width="160" height="26" rx="2"/><text x="100" y="77" text-anchor="middle">FastAPI</text>
+          <line x1="100" y1="86" x2="100" y2="108"/>
+          <rect class="box" x="20" y="110" width="72" height="26" rx="2"/><text x="56" y="127" text-anchor="middle">Firestore</text>
+          <rect class="box" x="108" y="110" width="72" height="26" rx="2"/><text x="144" y="127" text-anchor="middle">Analytics</text>
+          <line x1="56" y1="136" x2="56" y2="150"/><line x1="144" y1="136" x2="144" y2="150"/>
+          <text x="100" y="166" text-anchor="middle" fill="#7C8891" font-size="8">8,000+ concurrent users</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <p class="project-tag">Production system</p>
+        <h3>AURA AI — Enterprise Development Platform</h3>
+        <p class="desc">A unified interface where users generate websites, run data analysis, create images, and automate development workflows. Multi-agent orchestration with LangChain and LangGraph on top of OpenAI LLMs, wired into a React.js frontend and FastAPI backend, with role-based experiences for developers, analysts, and designers. Includes secure file uploads, cloud storage, an in-browser code editor, and deployable generated source code.</p>
+        <p class="impact">Impact: replaced several standalone AI tools with one platform, speeding up prototyping and developer output.</p>
+        <div class="stack">
+          <span class="chip">React.js</span><span class="chip">FastAPI</span><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">OpenAI</span><span class="chip">Firestore</span>
+        </div>
+      </div>
+      <div class="mini-diagram">
+        <svg viewBox="0 0 200 180" width="100%">
+          <rect class="box acc" x="55" y="8" width="90" height="26" rx="2"/><text x="100" y="25" text-anchor="middle">Orchestrator</text>
+          <line x1="100" y1="34" x2="30" y2="60"/><line x1="100" y1="34" x2="100" y2="60"/><line x1="100" y1="34" x2="170" y2="60"/>
+          <rect class="box" x="4" y="62" width="52" height="26" rx="2"/><text x="30" y="79" text-anchor="middle" font-size="8">Web agent</text>
+          <rect class="box" x="74" y="62" width="52" height="26" rx="2"/><text x="100" y="79" text-anchor="middle" font-size="8">Data agent</text>
+          <rect class="box" x="144" y="62" width="52" height="26" rx="2"/><text x="170" y="79" text-anchor="middle" font-size="8">Image agent</text>
+          <line x1="30" y1="88" x2="100" y2="112"/><line x1="100" y1="88" x2="100" y2="112"/><line x1="170" y1="88" x2="100" y2="112"/>
+          <rect class="box" x="45" y="114" width="110" height="26" rx="2"/><text x="100" y="131" text-anchor="middle" font-size="8">Code + deploy output</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="project">
+      <div>
+        <p class="project-tag">Applied ML</p>
+        <h3>TikTok Sentiment Analysis System</h3>
+        <p class="desc">A sentiment classifier trained on 9,000+ TikTok reviews using TF-IDF vectorization and SVM, with preprocessing and sampling to handle class imbalance across positive, neutral, and negative reviews. Evaluated with classification reports, confusion matrices, precision/recall, and AUROC.</p>
+        <p class="impact">Result: 97% accuracy, 0.97 weighted F1 score.</p>
+        <div class="stack">
+          <span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">TF-IDF</span><span class="chip">SVM</span><span class="chip">NLP</span>
+        </div>
+      </div>
+      <div class="mini-diagram">
+        <svg viewBox="0 0 200 180" width="100%">
+          <rect class="box" x="20" y="14" width="160" height="24" rx="2"/><text x="100" y="30" text-anchor="middle" font-size="8">9,000+ reviews</text>
+          <line x1="100" y1="38" x2="100" y2="58"/>
+          <rect class="box" x="20" y="60" width="160" height="24" rx="2"/><text x="100" y="76" text-anchor="middle" font-size="8">TF-IDF vectorize</text>
+          <line x1="100" y1="84" x2="100" y2="104"/>
+          <rect class="box acc" x="20" y="106" width="160" height="24" rx="2"/><text x="100" y="122" text-anchor="middle" font-size="8">SVM classifier</text>
+          <line x1="100" y1="130" x2="100" y2="150"/>
+          <text x="100" y="164" text-anchor="middle" fill="#7C8891" font-size="8">97% accuracy · 0.97 F1</text>
+        </svg>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;">
+      <p class="project-tag">Also on GitHub</p>
+      <div class="lab-list">
+        <div class="lab-item">
+          <h4>ChaseAI</h4>
+          <p>A chase game with pathfinding driven by the A* algorithm.</p>
+          <a href="https://github.com/Manikanny/ChaseAI" target="_blank" rel="noopener">View repository</a>
+        </div>
+        <div class="lab-item">
+          <h4>Student Performance Prediction</h4>
+          <p>Predicts student outcomes with linear regression and decision-tree models.</p>
+          <a href="https://github.com/Manikanny/StudentPerformancePrediction" target="_blank" rel="noopener">View repository</a>
+        </div>
+        <div class="lab-item">
+          <h4>Diabetes Prediction</h4>
+          <p>A classification model that flags diabetes risk from patient attributes.</p>
+          <a href="https://github.com/Manikanny/DiabetesPrediction" target="_blank" rel="noopener">View repository</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-head">
+      <h2>Skills</h2>
+      <span class="section-num">by category</span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h4>Languages</h4>
+        <ul>
+          <li>Java</li><li>Python</li><li>C / C++</li><li>SQL</li><li>JavaScript</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h4>Systems &amp; cloud</h4>
+        <ul>
+          <li>Distributed / service-oriented architecture</li>
+          <li>REST APIs</li>
+          <li>Google Cloud Functions, Firestore</li>
+          <li>Azure</li>
+          <li>Scalable system design</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h4>AI &amp; ML</h4>
+        <ul>
+          <li>Machine learning, deep learning</li>
+          <li>NLP</li>
+          <li>LangChain, LangGraph</li>
+          <li>scikit-learn, TensorFlow</li>
+          <li>Pandas, NumPy</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h4>Core CS &amp; tools</h4>
+        <ul>
+          <li>Data structures &amp; algorithms</li>
+          <li>OOD, complexity analysis</li>
+          <li>DBMS, OS, networks</li>
+          <li>React.js, FastAPI</li>
+          <li>Git, GitHub Actions</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="section-head">
+      <h2>Achievements</h2>
+      <span class="section-num">competitions &amp; recognition</span>
+    </div>
+    <div class="ach-list">
+      <div class="ach-item"><span class="ach-tag">GATE 2025</span><span>Secured All India Rank 5,435 in the DA paper among thousands of candidates.</span></div>
+      <div class="ach-item"><span class="ach-tag">ICAMSD 2025</span><span>Received Best Research Paper recognition at the International Conference on AI and ML for Sustainable Development.</span></div>
+      <div class="ach-item"><span class="ach-tag">Flipkart Grid 5.0</span><span>Qualified for Round 2 of the national-level software engineering and innovation competition.</span></div>
+      <div class="ach-item"><span class="ach-tag">CodeKaze 2023</span><span>Attained All India Rank 5,884, run by Naukri Engineer's Week.</span></div>
+      <div class="ach-item"><span class="ach-tag">HackerRank</span><span>Earned the 5-star Problem Solving badge for consistent algorithmic performance.</span></div>
+      <div class="ach-item"><span class="ach-tag">Hackathons</span><span>Competed at TRI-NIT and NNRG, both focused on AI and software innovation.</span></div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-head">
+      <h2>Education</h2>
+      <span class="section-num">2019 — 2025</span>
+    </div>
+    <div class="edu-item">
+      <div class="school">VNR Vignana Jyothi Institute of Engineering and Technology</div>
+      <div class="deg">B.Tech, Computer Science and Engineering (AIML) — CGPA 8.2 / 10</div>
+      <div class="when">2021 — 2025 · Hyderabad, India</div>
+    </div>
+    <div class="edu-item">
+      <div class="school">Narayana Junior College, TSBIE</div>
+      <div class="deg">Intermediate — 97.6%</div>
+      <div class="when">2019 — 2021 · Hyderabad, India</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <footer id="contact">
+    <p class="contact-headline">Building something that needs to hold up under load? Let's talk.</p>
+    <div class="contact-links">
+      <button class="copy-btn" id="emailBtn">gudipatimanikesh3@gmail.com</button>
+      <a href="tel:+919440934850">+91 94409 34850</a>
+      <a href="https://www.linkedin.com/in/gudipati-manikesh-708006259/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/Manikanny" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="foot-meta">
+      <span>Gudipati Manikesh — Hyderabad, India</span>
+      <span>© 2026</span>
+    </div>
+  </footer>
+
+</main>
+
+<div class="toast" id="toast">Email copied</div>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      var id = link.getAttribute('href').slice(1);
+      var target = document.getElementById(id);
+      if(target){
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
+
+  document.getElementById('emailBtn').addEventListener('click', function(){
+    var email = 'gudipatimanikesh3@gmail.com';
+    navigator.clipboard.writeText(email).then(function(){
+      var t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(function(){ t.classList.remove('show'); }, 1800);
+    });
+  });
+</script>
+
+</body>
+</html>
