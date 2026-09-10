@@ -82,10 +82,22 @@
   }
   .mark{
     font-family:var(--mono);
-    font-size:15px;
+    font-size:17px;
     font-weight:500;
     letter-spacing:0.01em;
     text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+  }
+  .mark-avatar{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid var(--line-strong);
+    display:block;
+    flex-shrink:0;
   }
   .mark span{color:var(--accent-ink);}
   nav.primary{
@@ -179,15 +191,109 @@
     aspect-ratio: 4 / 5;
     box-shadow:0 18px 32px rgba(20,31,41,0.06);
     transform:translateY(-92px);
+    display:flex;
+    flex-direction:column;
+    padding:16px;
   }
-  .hero-visual img{
-    display:block;
-    width:100%;
+  .game-hud{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  .game-lives{
+    display:flex;
+    gap:5px;
+  }
+  .game-life{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--accent);
+    transition:opacity .2s ease;
+  }
+  .game-boss{
+    margin-bottom:10px;
+  }
+  .game-boss-label{
+    font-family:var(--mono);
+    font-size:10.5px;
+    color:var(--ink-faint);
+    margin-bottom:4px;
+  }
+  .game-boss-track{
+    background:rgba(20,31,41,0.1);
+    border-radius:3px;
+    height:6px;
+    overflow:hidden;
+  }
+  .game-boss-fill{
+    background:var(--accent-ink);
     height:100%;
-    object-fit:cover;
-    object-position:center 28%;
-    transform-origin:center center;
-    filter:saturate(0.96) contrast(1.05);
+    width:100%;
+    transition:width .2s ease;
+  }
+  .game-arena{
+    position:relative;
+    flex:1;
+    background-color:rgba(20,31,41,0.03);
+    background-image:
+      linear-gradient(rgba(20,31,41,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20,31,41,0.08) 1px, transparent 1px);
+    background-size:14px 14px;
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .game-token{
+    position:absolute;
+    font-family:var(--mono);
+    font-weight:500;
+    font-size:14px;
+    color:var(--accent-ink);
+    background:var(--paper);
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius);
+    padding:4px 7px;
+    cursor:pointer;
+    user-select:none;
+    line-height:1;
+  }
+  .game-overlay{
+    position:absolute;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background:rgba(20,31,41,0.82);
+    gap:10px;
+    text-align:center;
+    padding:0 16px;
+  }
+  .game-overlay-text{
+    font-family:var(--mono);
+    font-size:14px;
+    color:var(--paper);
+  }
+  .game-restart{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--ink);
+    background:var(--paper);
+    border:none;
+    border-radius:var(--radius);
+    padding:8px 16px;
+    cursor:pointer;
+  }
+  .game-hint{
+    font-family:var(--mono);
+    font-size:10px;
+    color:var(--ink-faint);
+    text-align:center;
+    margin-top:8px;
   }
   .eyebrow{
     font-family:var(--mono);
@@ -502,13 +608,49 @@
 
   /* ---------- Education ---------- */
   .edu-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
     padding:18px 0;
     border-top:1px solid var(--line);
   }
   .edu-item:first-child{border-top:none;}
+  .edu-text{flex:1 1 auto; min-width:0;}
   .edu-item .school{font-weight:600; font-size:15.5px;}
   .edu-item .deg{color:var(--ink-soft); font-size:14px; margin-top:2px;}
   .edu-item .when{font-family:var(--mono); font-size:12.5px; color:var(--ink-faint); margin-top:4px;}
+  .edu-side{
+    flex:0 0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+  }
+  .edu-logo{
+    display:block;
+    width:56px;
+    height:56px;
+    border-radius:8px;
+    overflow:hidden;
+    border:1px solid var(--line-strong);
+    background:var(--panel);
+    transition:transform .15s ease, border-color .15s ease;
+  }
+  .edu-logo:hover{transform:translateY(-2px); border-color:var(--ink);}
+  .edu-logo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .edu-score{
+    font-family:var(--mono);
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--accent-ink);
+    white-space:nowrap;
+  }
 
   /* ---------- Personal ---------- */
   .personal{
@@ -548,15 +690,84 @@
 
   /* ---------- Contact / Footer ---------- */
   footer{
-    padding:64px 0 48px;
+    padding:24px 0 48px;
     border-top:1px solid var(--line);
+  }
+  .contact-grid{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .contact-photo{
+    width:100%;
+    position:relative;
+    margin-bottom:8px;
+    padding-top:2px;
+  }
+  .contact-photo svg{
+    display:block;
+    width:100%;
+    height:46px;
+  }
+  .pstring-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:8px;
+    margin-top:-14px;
+  }
+  .pstring-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    flex:1 1 0;
+  }
+  .pstring-item:nth-child(odd) .pstring-photo{transform:rotate(-4deg);}
+  .pstring-item:nth-child(even) .pstring-photo{transform:rotate(4deg);}
+  .pstring-pin{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--accent);
+    flex-shrink:0;
+  }
+  .pstring-thread{
+    width:1px;
+    height:14px;
+    background:var(--ink-faint);
+    flex-shrink:0;
+  }
+  .pstring-photo{
+    display:inline-block;
+    background:#fff;
+    padding:clamp(4px,0.8vw,6px) clamp(4px,0.8vw,6px) clamp(10px,2vw,16px);
+    border:1px solid rgba(20,31,41,0.1);
+    box-shadow:0 8px 16px rgba(20,31,41,0.15);
+    transition:transform .2s ease;
+    max-width:100%;
+  }
+  .pstring-photo:hover{transform:rotate(0deg) !important;}
+  .pstring-photo img{
+    display:block;
+    width:clamp(46px,9vw,84px);
+    height:clamp(46px,9vw,84px);
+    object-fit:cover;
+    filter:saturate(0.96) contrast(1.05);
+  }
+  .pstring-photo .cap{
+    font-family:var(--mono);
+    font-size:clamp(7.5px,1.4vw,9.5px);
+    color:var(--ink-soft);
+    text-align:center;
+    margin-top:5px;
+    white-space:nowrap;
   }
   .contact-headline{
     font-family:var(--mono);
     font-weight:500;
-    font-size:clamp(1.7rem, 4vw, 2.6rem);
-    margin:0 0 26px;
-    max-width:18ch;
+    font-size:13px;
+    color:var(--ink-faint);
+    max-width:100%;
   }
   .contact-links{
     display:flex;
@@ -659,7 +870,7 @@
     .personal-copy{font-size:15px; line-height:1.6;}
     .personal-points li{font-size:12px;}
 
-    .contact-headline{font-size:clamp(1.4rem, 8vw, 2.6rem); max-width:100%;}
+    .contact-headline{font-size:12px; max-width:100%;}
     .contact-links a, .copy-btn{font-size:12.5px; padding:10px 14px;}
     .foot-meta{font-size:11px;}
   }
@@ -669,7 +880,7 @@
 
 <header class="top">
   <div class="top-inner">
-    <a class="mark" href="#top">⚡ Manikesh Gudipati<span>.</span></a>
+    <a class="mark" href="#top"><img class="mark-avatar" src="img2.jpeg" alt="" /> Manikesh Gudipati<span>.</span></a>
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Toggle navigation menu">
       <span></span>
     </button>
@@ -689,7 +900,22 @@
   <section class="hero" style="border-top:none;">
     <div class="hero-grid">
       <div class="hero-visual">
-        <img src="img2.jpeg" alt="Gudipati Manikesh" />
+        <div class="game-hud">
+          <span id="gScore">SCORE 0</span>
+          <span id="gLevel">LEVEL 1</span>
+          <span class="game-lives" id="gLives"></span>
+        </div>
+        <div class="game-boss">
+          <div class="game-boss-label">BOSS: SegmentationFault</div>
+          <div class="game-boss-track"><div class="game-boss-fill" id="gBoss"></div></div>
+        </div>
+        <div class="game-arena" id="gArena">
+          <div class="game-overlay" id="gOverlay">
+            <div class="game-overlay-text" id="gOverlayText"></div>
+            <button class="game-restart" id="gRestart">tap to restart</button>
+          </div>
+        </div>
+        <div class="game-hint">tap the tokens before they hit bottom</div>
       </div>
 
       <div>
@@ -888,19 +1114,43 @@
       <span class="section-num">2019 — 2025</span>
     </div>
     <div class="edu-item">
-      <div class="school">🎓 VNR Vignana Jyothi Institute of Engineering and Technology</div>
-      <div class="deg">B.Tech, Computer Science and Engineering (AIML) — CGPA 8.2 / 10</div>
-      <div class="when">2021 — 2025 · Hyderabad, India</div>
+      <div class="edu-text">
+        <div class="school">🎓 VNR Vignana Jyothi Institute of Engineering and Technology</div>
+        <div class="deg">B.Tech, Computer Science and Engineering (AIML)</div>
+        <div class="when">2021 — 2025 · Hyderabad, India</div>
+      </div>
+      <div class="edu-side">
+        <a class="edu-logo" href="https://www.vnrvjiet.ac.in/" target="_blank" rel="noopener" aria-label="Visit VNR VJIET website">
+          <img src="img10.jpeg" alt="VNR Vignana Jyothi Institute of Engineering and Technology logo" />
+        </a>
+        <span class="edu-score">8.34 CGPA</span>
+      </div>
     </div>
     <div class="edu-item">
-      <div class="school">📚 Narayana Junior College, TSBIE</div>
-      <div class="deg">Intermediate — 97.6%</div>
-      <div class="when">2019 — 2021 · Hyderabad, India</div>
+      <div class="edu-text">
+        <div class="school">📚 Narayana Junior College, TSBIE</div>
+        <div class="deg">Intermediate</div>
+        <div class="when">2019 — 2021 · Hyderabad, India</div>
+      </div>
+      <div class="edu-side">
+        <a class="edu-logo" href="https://www.narayanagroup.com/" target="_blank" rel="noopener" aria-label="Visit Narayana Junior College website">
+          <img src="img11.jpeg" alt="Narayana Junior College logo" />
+        </a>
+        <span class="edu-score">97.6%</span>
+      </div>
     </div>
     <div class="edu-item">
-      <div class="school">🏫 Kendriya Vidyalaya Sangathan - Nalgonda, CBSE</div>
-      <div class="deg">School — 86.4%</div>
-      <div class="when">2012 — 2019 · Nalgonda, India</div>
+      <div class="edu-text">
+        <div class="school">🏫 Kendriya Vidyalaya Sangathan - Nalgonda, CBSE</div>
+        <div class="deg">School</div>
+        <div class="when">2012 — 2019 · Nalgonda, India</div>
+      </div>
+      <div class="edu-side">
+        <a class="edu-logo" href="https://kvsangathan.nic.in/" target="_blank" rel="noopener" aria-label="Visit Kendriya Vidyalaya Sangathan website">
+          <img src="img12.jpeg" alt="Kendriya Vidyalaya Sangathan logo" />
+        </a>
+        <span class="edu-score">86.4%</span>
+      </div>
     </div>
   </section>
 
@@ -925,12 +1175,63 @@
 
   <!-- CONTACT -->
   <footer id="contact">
-    <p class="contact-headline">💬 Building something that needs to hold up under load? Let's talk.</p>
-    <div class="contact-links">
-      <button class="copy-btn" id="emailBtn">📧 gudipatimanikesh3@gmail.com</button>
-      <a href="tel:+919440934850">📞 +91 94409 34850</a>
-      <a href="https://www.linkedin.com/in/gudipati-manikesh-708006259/" target="_blank" rel="noopener">💼 LinkedIn</a>
-      <a href="https://github.com/Manikanny" target="_blank" rel="noopener">🐙 GitHub</a>
+    <div class="contact-grid">
+      <div class="contact-photo">
+        <svg viewBox="0 0 1000 130" preserveAspectRatio="none">
+          <path d="M10,65 Q120,8 240,62 Q360,115 480,58 Q600,5 720,65 Q840,118 990,55" fill="none" stroke="var(--ink-soft)" stroke-width="2" stroke-dasharray="1 6" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        </svg>
+        <div class="pstring-row">
+          <div class="pstring-item">
+            <div class="pstring-pin"></div>
+            <div class="pstring-thread"></div>
+            <div class="pstring-photo">
+              <img src="img13.jpeg" alt="Gudipati Manikesh at work" />
+              <div class="cap">🎂</div>
+            </div>
+          </div>
+          <div class="pstring-item">
+            <div class="pstring-pin"></div>
+            <div class="pstring-thread"></div>
+            <div class="pstring-photo">
+              <img src="img14.jpeg" alt="Gudipati Manikesh at IIT Guwahati" />
+              <div class="cap">💻</div>
+            </div>
+          </div>
+          <div class="pstring-item">
+            <div class="pstring-pin"></div>
+            <div class="pstring-thread"></div>
+            <div class="pstring-photo">
+              <img src="img16.jpeg" alt="Gudipati Manikesh at a hackathon" />
+              <div class="cap">🎭</div>
+            </div>
+          </div>
+          <div class="pstring-item">
+            <div class="pstring-pin"></div>
+            <div class="pstring-thread"></div>
+            <div class="pstring-photo">
+              <img src="img17.jpeg" alt="Gudipati Manikesh with friends" />
+              <div class="cap">🎓</div>
+            </div>
+          </div>
+          <div class="pstring-item">
+            <div class="pstring-pin"></div>
+            <div class="pstring-thread"></div>
+            <div class="pstring-photo">
+              <img src="img15.jpeg" alt="Gudipati Manikesh travelling" />
+              <div class="cap">✌️</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-text">
+        <p class="contact-headline">💬 Building something that needs to hold up under load? Let's talk.</p>
+        <div class="contact-links">
+          <button class="copy-btn" id="emailBtn">📧 gudipatimanikesh3@gmail.com</button>
+          <a href="tel:+919440934850">📞 +91 94409 34850</a>
+          <a href="https://www.linkedin.com/in/gudipati-manikesh-708006259/" target="_blank" rel="noopener">💼 LinkedIn</a>
+          <a href="https://github.com/Manikanny" target="_blank" rel="noopener">🐙 GitHub</a>
+        </div>
+      </div>
     </div>
     <div class="foot-meta">
       <span>With Love Manikesh ❤️</span>
@@ -975,6 +1276,133 @@
       setTimeout(function(){ t.classList.remove('show'); }, 1800);
     });
   });
+
+  (function(){
+    var arena = document.getElementById('gArena');
+    var scoreEl = document.getElementById('gScore');
+    var levelEl = document.getElementById('gLevel');
+    var livesEl = document.getElementById('gLives');
+    var bossEl = document.getElementById('gBoss');
+    var overlay = document.getElementById('gOverlay');
+    var overlayText = document.getElementById('gOverlayText');
+    var restartBtn = document.getElementById('gRestart');
+
+    var tokens = ['{ }', '( )', '[ ]', ';', '=>', '&&', '||', '==', 'NaN', '404', '0x1F', 'null', 'try', 'catch'];
+
+    var state = {};
+    var spawnTimer = null;
+    var loopTimer = null;
+    var gameOverTimer = null;
+
+    function initLives(){
+      livesEl.innerHTML = '';
+      for(var i=0;i<3;i++){
+        var dot = document.createElement('span');
+        dot.className = 'game-life';
+        livesEl.appendChild(dot);
+      }
+    }
+
+    function updateLives(){
+      var dots = livesEl.children;
+      for(var i=0;i<3;i++){
+        dots[i].style.opacity = i < state.lives ? '1' : '0.18';
+      }
+    }
+
+    function reset(){
+      Array.prototype.forEach.call(arena.querySelectorAll('.game-token'), function(el){ el.remove(); });
+      state = { score:0, level:1, lives:3, bossHealth:100, bossMax:100, spawnMs:900, fallSpeed:2, tokens:[], nextId:0, running:true };
+      scoreEl.textContent = 'SCORE 0';
+      levelEl.textContent = 'LEVEL 1';
+      bossEl.style.width = '100%';
+      initLives();
+      updateLives();
+      overlay.style.display = 'none';
+      clearInterval(spawnTimer);
+      clearInterval(loopTimer);
+      clearTimeout(gameOverTimer);
+      spawnTimer = setInterval(spawnToken, state.spawnMs);
+      loopTimer = setInterval(tick, 50);
+    }
+
+    function spawnToken(){
+      if(!state.running) return;
+      if(state.tokens.length >= 6) return;
+      var el = document.createElement('div');
+      el.className = 'game-token';
+      el.style.left = (Math.random()*72) + '%';
+      el.style.top = '-30px';
+      el.textContent = tokens[Math.floor(Math.random()*tokens.length)];
+      var tok = { id: state.nextId++, y:-30, el: el };
+      el.addEventListener('click', function(){ squash(tok); });
+      arena.appendChild(el);
+      state.tokens.push(tok);
+    }
+
+    function squash(tok){
+      if(!state.running) return;
+      tok.el.remove();
+      state.tokens = state.tokens.filter(function(t){ return t.id !== tok.id; });
+      state.score += 10;
+      scoreEl.textContent = 'SCORE ' + state.score;
+      state.bossHealth -= 100/8;
+      if(state.bossHealth <= 0){
+        levelUp();
+      } else {
+        bossEl.style.width = Math.max(state.bossHealth,0) + '%';
+      }
+    }
+
+    function levelUp(){
+      state.level += 1;
+      state.bossHealth = state.bossMax;
+      bossEl.style.width = '100%';
+      levelEl.textContent = 'LEVEL ' + state.level;
+      state.fallSpeed += 0.5;
+      state.spawnMs = Math.max(500, state.spawnMs - 110);
+      clearInterval(spawnTimer);
+      spawnTimer = setInterval(spawnToken, state.spawnMs);
+      overlayText.textContent = 'LEVEL UP';
+      overlay.style.display = 'flex';
+      restartBtn.style.display = 'none';
+      setTimeout(function(){ overlay.style.display = 'none'; restartBtn.style.display = 'inline-block'; }, 650);
+    }
+
+    function loseLife(){
+      state.lives -= 1;
+      updateLives();
+      if(state.lives <= 0) gameOver();
+    }
+
+    function gameOver(){
+      state.running = false;
+      clearInterval(spawnTimer);
+      clearInterval(loopTimer);
+      overlayText.textContent = 'GAME OVER — score ' + state.score;
+      overlay.style.display = 'flex';
+      restartBtn.style.display = 'none';
+      gameOverTimer = setTimeout(reset, 1000);
+    }
+
+    function tick(){
+      if(!state.running) return;
+      var h = arena.clientHeight;
+      state.tokens.forEach(function(t){
+        t.y += state.fallSpeed;
+        t.el.style.top = t.y + 'px';
+      });
+      var escaped = state.tokens.filter(function(t){ return t.y > h - 24; });
+      if(escaped.length){
+        escaped.forEach(function(t){ t.el.remove(); });
+        state.tokens = state.tokens.filter(function(t){ return t.y <= h - 24; });
+        loseLife();
+      }
+    }
+
+    restartBtn.addEventListener('click', reset);
+    reset();
+  })();
 </script>
 
 </body>
